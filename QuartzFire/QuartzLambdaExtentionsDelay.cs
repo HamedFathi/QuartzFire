@@ -5,7 +5,7 @@ namespace Quartz
 {
     public static partial class QuartzLambdaExtentions
     {
-        public static Task<DateTimeOffset> Enqueue(this IScheduler scheduler, Action action, bool disallowConcurrentJob = false)
+        public static Task<DateTimeOffset> Delay(this IScheduler scheduler, Action action, TimeSpan delay, bool disallowConcurrentJob = false)
         {
             IJobDetail jobDetail;
             if (disallowConcurrentJob)
@@ -25,14 +25,15 @@ namespace Quartz
                     .Build();
             }
 
+            var date = DateTimeOffset.UtcNow.AddTicks(delay.Ticks);
             var trigger = TriggerBuilder.Create()
-                .StartNow()
+                .StartAt(date)
                 .Build();
 
             return scheduler.ScheduleJob(jobDetail, trigger);
         }
 
-        public static Task<DateTimeOffset> Enqueue<T>(this IScheduler scheduler, Action<T> action, bool disallowConcurrentJob = false)
+        public static Task<DateTimeOffset> Delay<T>(this IScheduler scheduler, Action<T> action, TimeSpan delay, bool disallowConcurrentJob = false)
             where T : new()
         {
             IJobDetail jobDetail;
@@ -53,8 +54,9 @@ namespace Quartz
                     .Build();
             }
 
+            var date = DateTimeOffset.UtcNow.AddTicks(delay.Ticks);
             var trigger = TriggerBuilder.Create()
-                .StartNow()
+                .StartAt(date)
                 .Build();
 
             return scheduler.ScheduleJob(jobDetail, trigger);

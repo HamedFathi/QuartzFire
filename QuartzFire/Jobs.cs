@@ -13,12 +13,12 @@ namespace Quartz
             }
         }
 
-        internal class JobType : IJob
+        internal class JobWithType : IJob
         {
             public Task Execute(IJobExecutionContext context)
             {
-                var obj = context.JobDetail.JobDataMap["JobType"];
-                return Task.Run(() => (context.JobDetail.JobDataMap["JobTypeAction"] as Action<object>)?.Invoke(obj));
+                var obj = context.JobDetail.JobDataMap["JobWithType"];
+                return Task.Run(() => (context.JobDetail.JobDataMap["JobWithTypeAction"] as Action<object>)?.Invoke(obj));
             }
         }
 
@@ -32,12 +32,12 @@ namespace Quartz
         }
 
         [DisallowConcurrentExecution]
-        internal class DisallowConcurrentJobType : IJob
+        internal class DisallowConcurrentJobWithType : IJob
         {
             public Task Execute(IJobExecutionContext context)
             {
-                var obj = context.JobDetail.JobDataMap["DisallowConcurrentJobType"];
-                return Task.Run(() => (context.JobDetail.JobDataMap["DisallowConcurrentJobTypeAction"] as Action<object>)?.Invoke(obj));
+                var obj = context.JobDetail.JobDataMap["DisallowConcurrentJobWithType"];
+                return Task.Run(() => (context.JobDetail.JobDataMap["DisallowConcurrentJobWithTypeAction"] as Action<object>)?.Invoke(obj));
             }
         }
     }

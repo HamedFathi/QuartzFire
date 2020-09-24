@@ -8,18 +8,20 @@ namespace QuartzFireSample
 {
     public class Email
     {
-        public string Address { get; set; } = "asdasdasd";
+        public string Address { get; set; } = "myAddress";
     }
 
     class Program
     {
         async static Task Main(string[] args)
         {
-             await BackgroundJob.Enqueue(() => Console.WriteLine( "asd"), false);
+            await BackgroundJob.Enqueue(() => Console.WriteLine(DateTime.Now), true);
 
-             await BackgroundJob.Enqueue<Email>(x => Console.WriteLine(x.Address + "as222d"), true);
+            await BackgroundJob.Enqueue<Email>(x => Console.WriteLine(x.Address + " | " + DateTime.Now), true);
 
-            // await QuartzHelper.Schedule(() => Console.WriteLine("Hello"),TimeSpan.FromSeconds(1),TimeSpan.FromSeconds(4));
+            await BackgroundJob.Delay(() => Console.WriteLine(DateTime.Now), TimeSpan.FromSeconds(3), true);
+
+            await BackgroundJob.Delay<Email>(x => Console.WriteLine(x.Address + " | " + DateTime.Now), TimeSpan.FromSeconds(5), true);
 
             Console.ReadKey();
         }

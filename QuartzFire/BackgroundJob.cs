@@ -43,14 +43,30 @@ namespace QuartzFire
         {
             IScheduler scheduler = await _factory.GetScheduler();
             await scheduler.Start();
-            await scheduler.Enqueue<T>(action, disallowConcurrentJob);
+            await scheduler.Enqueue(action, disallowConcurrentJob);
         }
 
+        public static async Task Delay(Action action, TimeSpan delay, bool disallowConcurrentJob = false)
+        {
+            IScheduler scheduler = await _factory.GetScheduler();
+            await scheduler.Start();
+            await scheduler.Delay(action, delay, disallowConcurrentJob);
+        }
+
+        public static async Task Delay<T>(Action<T> action, TimeSpan delay, bool disallowConcurrentJob = false) where T : new()
+        {
+            IScheduler scheduler = await _factory.GetScheduler();
+            await scheduler.Start();
+            await scheduler.Delay(action, delay, disallowConcurrentJob);
+        }
+
+        /*
         public static async Task Schedule(Action action, TimeSpan delay, TimeSpan interval, bool disallowConcurrentJob = false)
         {
             IScheduler scheduler = await _factory.GetScheduler();
             await scheduler.Start();
             await scheduler.ScheduleJob(action, delay, interval, disallowConcurrentJob);
         }
+        */
     }
 }
