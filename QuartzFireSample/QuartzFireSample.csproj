@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuartzFire\QuartzFire.csproj" />
+	  <PackageReference Include="Quartz.Lambda" Version="1.0.5" />
+  </ItemGroup>
+
 </Project>
