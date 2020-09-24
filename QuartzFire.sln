@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30516.212
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzFire", "QuartzFire\QuartzFire.csproj", "{0B3092D1-3DA9-42FD-A751-A8AD06D200CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzFireSample", "QuartzFireSample\QuartzFireSample.csproj", "{2A8952F4-7047-4AB6-B15E-3737F1332C02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B3092D1-3DA9-42FD-A751-A8AD06D200CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3092D1-3DA9-42FD-A751-A8AD06D200CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3092D1-3DA9-42FD-A751-A8AD06D200CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3092D1-3DA9-42FD-A751-A8AD06D200CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8952F4-7047-4AB6-B15E-3737F1332C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8952F4-7047-4AB6-B15E-3737F1332C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8952F4-7047-4AB6-B15E-3737F1332C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8952F4-7047-4AB6-B15E-3737F1332C02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2641FC1-367F-435E-B7A4-5E07975E2373}
+	EndGlobalSection
+EndGlobal
