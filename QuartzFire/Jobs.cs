@@ -9,16 +9,16 @@ namespace Quartz
         {
             public Task Execute(IJobExecutionContext context)
             {
-                return Task.Run(() => (context.JobDetail.JobDataMap["action"] as Action)?.Invoke());
+                return Task.Run(() => (context.JobDetail.JobDataMap["JobAction"] as Action)?.Invoke());
             }
         }
 
-        internal class JobT : IJob
+        internal class JobType : IJob
         {
             public Task Execute(IJobExecutionContext context)
             {
-                var obj = context.JobDetail.JobDataMap["T"];
-                return Task.Run(() => (context.JobDetail.JobDataMap["actionT"] as Action<object>)?.Invoke(obj));
+                var obj = context.JobDetail.JobDataMap["JobType"];
+                return Task.Run(() => (context.JobDetail.JobDataMap["JobTypeAction"] as Action<object>)?.Invoke(obj));
             }
         }
 
@@ -27,17 +27,17 @@ namespace Quartz
         {
             public Task Execute(IJobExecutionContext context)
             {
-                return Task.Run(() => (context.JobDetail.JobDataMap["disallowConcurrentAction"] as Action)?.Invoke());
+                return Task.Run(() => (context.JobDetail.JobDataMap["DisallowConcurrentJobAction"] as Action)?.Invoke());
             }
         }
 
         [DisallowConcurrentExecution]
-        internal class DisallowConcurrentJobT : IJob
+        internal class DisallowConcurrentJobType : IJob
         {
             public Task Execute(IJobExecutionContext context)
             {
-                var obj = context.JobDetail.JobDataMap["DT"];
-                return Task.Run(() => (context.JobDetail.JobDataMap["disallowConcurrentActionT"] as Action<object>)?.Invoke(obj));
+                var obj = context.JobDetail.JobDataMap["DisallowConcurrentJobType"];
+                return Task.Run(() => (context.JobDetail.JobDataMap["DisallowConcurrentJobTypeAction"] as Action<object>)?.Invoke(obj));
             }
         }
     }

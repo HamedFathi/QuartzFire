@@ -8,7 +8,7 @@ namespace Quartz
         /// <summary>
         /// Schedule action with delay and repeat interval.
         /// </summary>
-        /// <param name="action">Action to schedule</param>
+        /// <param name="JobAction">Action to schedule</param>
         /// <param name="delay">Timespan delay</param>
         /// <param name="interval">Timespan execution interval</param>
         /// <returns></returns>
@@ -17,7 +17,7 @@ namespace Quartz
             IJobDetail jobDetail;
             if (disallowConcurrentJob)
             {
-                var data = new JobDataMap { { "disallowConcurrentAction", action } };
+                var data = new JobDataMap { { "DisallowConcurrentJobAction", action } };
                 jobDetail = JobBuilder
                     .Create<DisallowConcurrentJob>()
                     .UsingJobData(data)
@@ -25,7 +25,7 @@ namespace Quartz
             }
             else
             {
-                var data = new JobDataMap { { "action", action } };
+                var data = new JobDataMap { { "JobAction", action } };
                 jobDetail = JobBuilder
                     .Create<Job>()
                     .UsingJobData(data)
@@ -43,7 +43,7 @@ namespace Quartz
         /// <summary>
         /// Schedule action with delay and repeat interval.
         /// </summary>
-        /// <param name="action">Action to schedule</param>
+        /// <param name="JobAction">Action to schedule</param>
         /// <param name="delay">Dealy in secconds</param>
         /// <param name="interval">Execution interval in seconds</param>
         /// <returns></returns>
@@ -53,7 +53,7 @@ namespace Quartz
         /// <summary>
         /// Schedule action with trigger builder.
         /// </summary>
-        /// <param name="action">Action to schedule</param>
+        /// <param name="JobAction">Action to schedule</param>
         /// <param name="triggerBuilder">Trigger builder</param>
         /// <returns></returns>
         public static Task<DateTimeOffset> ScheduleJob(this IScheduler scheduler, Action action, Func<TriggerBuilder, TriggerBuilder> triggerBuilder, bool disallowConcurrentJob = false)
@@ -61,7 +61,7 @@ namespace Quartz
             IJobDetail jobDetail;
             if (disallowConcurrentJob)
             {
-                var data = new JobDataMap { { "disallowConcurrentAction", action } };
+                var data = new JobDataMap { { "DisallowConcurrentJobAction", action } };
                 jobDetail = JobBuilder
                     .Create<DisallowConcurrentJob>()
                     .UsingJobData(data)
@@ -69,7 +69,7 @@ namespace Quartz
             }
             else
             {
-                var data = new JobDataMap { { "action", action } };
+                var data = new JobDataMap { { "JobAction", action } };
                 jobDetail = JobBuilder
                     .Create<Job>()
                     .UsingJobData(data)

@@ -10,7 +10,7 @@ namespace Quartz
             IJobDetail jobDetail;
             if (disallowConcurrentJob)
             {
-                var data = new JobDataMap { { "disallowConcurrentAction", action } };
+                var data = new JobDataMap { { "DisallowConcurrentJobAction", action } };
                 jobDetail = JobBuilder
                     .Create<DisallowConcurrentJob>()
                     .UsingJobData(data)
@@ -18,7 +18,7 @@ namespace Quartz
             }
             else
             {
-                var data = new JobDataMap { { "action", action } };
+                var data = new JobDataMap { { "JobAction", action } };
                 jobDetail = JobBuilder
                     .Create<Job>()
                     .UsingJobData(data)
@@ -39,17 +39,17 @@ namespace Quartz
             IJobDetail jobDetail;
             if (disallowConcurrentJob)
             {
-                var data = new JobDataMap { { "disallowConcurrentActionT", action.Convert() }, { "DT", new T() } };
+                var data = new JobDataMap { { "DisallowConcurrentJobTypeAction", action.Convert() }, { "DisallowConcurrentJobType", new T() } };
                 jobDetail = JobBuilder
-                    .Create<DisallowConcurrentJobT>()
+                    .Create<DisallowConcurrentJobType>()
                     .UsingJobData(data)
                     .Build();
             }
             else
             {
-                var data = new JobDataMap { { "actionT", action.Convert() }, { "T", new T() } };
+                var data = new JobDataMap { { "JobTypeAction", action.Convert() }, { "JobType", new T() } };
                 jobDetail = JobBuilder
-                    .Create<JobT>()
+                    .Create<JobType>()
                     .UsingJobData(data)
                     .Build();
             }
