@@ -31,10 +31,10 @@ namespace QuartzFireSample
             await QuartzScheduler.Schedule(() => Console.WriteLine(DateTime.Now), "0 0/5 * * * ?");
 
             await QuartzScheduler.Schedule(() => Console.WriteLine("With TriggerBuilder"),
-    builder => builder.StartNow()
-    .WithSimpleSchedule(x => x
-        .WithIntervalInSeconds(10)
-        .RepeatForever()));
+                    builder => builder.StartNow()
+                                      .WithSimpleSchedule(x => x
+                                      .WithIntervalInSeconds(10)
+                                      .RepeatForever()));
 
             Console.ReadKey();
         }
