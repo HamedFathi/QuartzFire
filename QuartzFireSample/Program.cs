@@ -15,13 +15,17 @@ namespace QuartzFireSample
     {
         async static Task Main(string[] args)
         {
-            await BackgroundJob.Enqueue(() => Console.WriteLine(DateTime.Now), true);
+            
+            await QuartzScheduler.Enqueue(() => Console.WriteLine(DateTime.Now), true);
 
-            await BackgroundJob.Enqueue<Email>(x => Console.WriteLine(x.Address + " | " + DateTime.Now), true);
+            await QuartzScheduler.Enqueue<Email>(x => Console.WriteLine(x.Address + " | " + DateTime.Now), true);
 
-            await BackgroundJob.Delay(() => Console.WriteLine(DateTime.Now), TimeSpan.FromSeconds(3), true);
+            await QuartzScheduler.Delay(() => Console.WriteLine(DateTime.Now), TimeSpan.FromSeconds(3), true);
 
-            await BackgroundJob.Delay<Email>(x => Console.WriteLine(x.Address + " | " + DateTime.Now), TimeSpan.FromSeconds(5), true);
+            await QuartzScheduler.Delay<Email>(x => Console.WriteLine(x.Address + " | " + DateTime.Now), TimeSpan.FromSeconds(5), true);
+
+            await QuartzScheduler.Schedule(() => Console.WriteLine(DateTime.Now), TimeSpan.FromSeconds(7), TimeSpan.FromSeconds(1), true);
+
 
             Console.ReadKey();
         }

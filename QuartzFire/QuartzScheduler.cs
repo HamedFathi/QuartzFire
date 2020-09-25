@@ -28,7 +28,7 @@ namespace QuartzFire
     //     }
     // });
 
-    public static class BackgroundJob
+    public static class QuartzScheduler
     {
         private readonly static StdSchedulerFactory _factory = new StdSchedulerFactory();
 
@@ -59,14 +59,32 @@ namespace QuartzFire
             await scheduler.Start();
             await scheduler.Delay(action, delay, disallowConcurrentJob);
         }
-
-        /*
         public static async Task Schedule(Action action, TimeSpan delay, TimeSpan interval, bool disallowConcurrentJob = false)
         {
             IScheduler scheduler = await _factory.GetScheduler();
             await scheduler.Start();
             await scheduler.ScheduleJob(action, delay, interval, disallowConcurrentJob);
         }
-        */
+
+        public static async Task Schedule(Action action, int delay, int interval, bool disallowConcurrentJob = false)
+        {
+            IScheduler scheduler = await _factory.GetScheduler();
+            await scheduler.Start();
+            await scheduler.ScheduleJob(action, delay, interval, disallowConcurrentJob);
+        }
+
+        public static async Task Schedule(Action action, Func<TriggerBuilder, TriggerBuilder> triggerBuilder, bool disallowConcurrentJob = false)
+        {
+            IScheduler scheduler = await _factory.GetScheduler();
+            await scheduler.Start();
+            await scheduler.ScheduleJob(action, triggerBuilder, disallowConcurrentJob);
+        }
+
+        public static async Task Schedule(Action action, string cron, bool disallowConcurrentJob = false)
+        {
+            IScheduler scheduler = await _factory.GetScheduler();
+            await scheduler.Start();
+            await scheduler.ScheduleJob(action, cron, disallowConcurrentJob);
+        }
     }
 }

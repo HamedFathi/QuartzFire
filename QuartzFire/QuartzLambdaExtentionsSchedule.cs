@@ -80,5 +80,33 @@ namespace Quartz
 
             return scheduler.ScheduleJob(jobDetail, trigger);
         }
+
+        public static Task<DateTimeOffset> ScheduleJob(this IScheduler scheduler, Action action, string cron, bool disallowConcurrentJob = false)
+        {
+            IJobDetail jobDetail;
+            if (disallowConcurrentJob)
+            {
+                var data = new JobDataMap { { "DisallowConcurrentJobAction", action } };
+                jobDetail = JobBuilder
+                    .Create<DisallowConcurrentJob>()
+                    .UsingJobData(data)
+                    .Build();
+            }
+            else
+            {
+                var data = new JobDataMap { { "JobAction", action } };
+                jobDetail = JobBuilder
+                    .Create<Job>()
+                    .UsingJobData(data)
+                    .Build();
+            }
+
+            var trigger = TriggerBuilder.Create()
+                .StartNow()
+                .WithCronSchedule(cron)
+                .Build();
+
+            return scheduler.ScheduleJob(jobDetail, trigger);
+        }
     }
 }
